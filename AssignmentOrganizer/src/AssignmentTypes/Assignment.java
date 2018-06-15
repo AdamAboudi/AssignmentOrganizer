@@ -1,5 +1,8 @@
 package AssignmentTypes;
-import java.time.*;
+
+import java.time.LocalDate;
+
+
 //Class Assignment. Assignment Object with parameters for name, difficulty, completion time, due date, and priority. Power is position in queue.
 public class Assignment extends superAssignment{
 

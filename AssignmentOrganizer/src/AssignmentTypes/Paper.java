@@ -1,6 +1,6 @@
 package AssignmentTypes;
 
-import java.time.*;
+import java.time.LocalDate;
 
 //Class Paper. Paper Object with parameters for name, length, completion time, due date, and priority. Power is position in queue.
 public class Paper extends superAssignment{

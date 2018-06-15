@@ -1,14 +1,26 @@
 package main;
 
-import java.io.*;
-import java.time.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+
 import AssignmentTypes.*;
 
 public class Organizer {
 
-	private static Scanner scan = new Scanner(System.in);
-	private static ArrayList<superAssignment> AssignmentList = new ArrayList<superAssignment>();
+    private static Scanner scan = new Scanner(System.in);
+    private static ArrayList<superAssignment> AssignmentList = new ArrayList<superAssignment>();
 
 	public static void main(String[] args) throws IOException {
 

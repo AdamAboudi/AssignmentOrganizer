@@ -1,6 +1,6 @@
 package AssignmentTypes;
 
-import java.time.*;
+import java.time.LocalDate;
 
 //Class Project. Project Object with parameters for name, difficulty, partners, due date, and priority. Power is position in queue.
 public class Project extends superAssignment{
