@@ -1,14 +1,28 @@
-package AssignmentTypes;
+package assignment.types;
 
 import java.time.LocalDate;
 
-//Class Reading. Reading Object with parameters for name, length, completion time, due date, and priority. Power is position in queue.
-public class Reading extends superAssignment{
+/**
+ * Class Reading. Reading Object with parameters for name, length,
+ * completion time, due date, and priority. Power is position in queue.
+ *
+ * @author Adam
+ *
+ */
+public class Reading extends SuperAssignment{
 
   private long length;
   private int completionTime;
 
-  // Public Constructor
+  /**
+   *  Public Constructor.
+   *  
+   * @param nam Name
+   * @param due DueDate
+   * @param prior Priority
+   * @param len Length
+   * @param comp Completion Time
+   */
   public Reading(String nam, LocalDate due, int prior, long len, int comp) {
     
     super(nam, due, prior);

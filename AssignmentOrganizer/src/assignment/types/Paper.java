@@ -1,15 +1,29 @@
-package AssignmentTypes;
+package assignment.types;
 
 import java.time.LocalDate;
 
-//Class Paper. Paper Object with parameters for name, length, completion time, due date, and priority. Power is position in queue.
-public class Paper extends superAssignment{
+/**
+ * Class Paper. Paper Object with parameters for name, length, 
+ * completion time, due date, and priority. Power is position in queue.
+ * 
+ * @author Adam
+ *
+ */
+public class Paper extends SuperAssignment {
 
 
   private long length;
   private int completionTime;
 
-  // Public Constructor
+  /**
+   *  Public Constructor.
+   *  
+   * @param nam name
+   * @param due dueDate
+   * @param prior Priority
+   * @param len Length
+   * @param comp Completion Time
+   */
   public Paper(String nam, LocalDate due, int prior, long len, int comp) {
       
     super(nam, due, prior);

@@ -1,14 +1,28 @@
-package AssignmentTypes;
+package assignment.types;
 
 import java.time.LocalDate;
 
-//Class Project. Project Object with parameters for name, difficulty, partners, due date, and priority. Power is position in queue.
-public class Project extends superAssignment{
+/**
+ * Class Project. Project Object with parameters for name, difficulty,
+ *  partners, due date, and priority. Power is position in queue.
+ * 
+ * @author Adam
+ *
+ */
+public class Project extends SuperAssignment{
 
   private int difficulty;
   private boolean partners;
 
-  // Public Constructor
+  /**
+   *  Public Constructor.
+   *  
+   * @param nam Name
+   * @param due DueDate
+   * @param prior Priority
+   * @param diff Difficulty
+   * @param part Partners (boolean)
+   */
   public Project(String nam, LocalDate due, int prior, int diff, boolean part) {
     
     super(nam, due, prior);
@@ -38,7 +52,9 @@ public class Project extends superAssignment{
   }
   
   
-  //Calculate power for a project
+  /**
+   * Calculate power for a project.
+   */
   public int projectPow() {
     if (partners) {
       return (int) (this.difficulty  + 10 + this.daysPow + this.priority);  

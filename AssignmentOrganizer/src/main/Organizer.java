@@ -13,21 +13,27 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.io.FileNotFoundException;
 
-import AssignmentTypes.*;
+import assignment.types.*;
+
+import java.io.FileNotFoundException;
 
 public class Organizer {
 
-  private static Scanner                    scan           = new Scanner(System.in);
-  private static ArrayList<superAssignment> AssignmentList = new ArrayList<superAssignment>();
+  private static Scanner scan = new Scanner(System.in);
+  private static ArrayList<SuperAssignment> AssignmentList = new ArrayList<SuperAssignment>();
 
+  /**
+   * Main method.
+   * @param args arguments (none)
+   * @throws IOException e
+   */
   public static void main(String[] args) throws IOException {
 
-    File Assignments = new File("Assignments.txt");
-    Assignments.createNewFile();
+    File assignments = new File("Assignments.txt");
+    assignments.createNewFile();
 
-    try (BufferedReader br = new BufferedReader(new FileReader(Assignments))) {
+    try (BufferedReader br = new BufferedReader(new FileReader(assignments))) {
       String line;
 
       if ((line = br.readLine()) == null) {
@@ -39,23 +45,35 @@ public class Organizer {
           switch (parts[0]) {
 
             case "Assignment":
-              AssignmentList.add(new Assignment(parts[1], LocalDate.parse(parts[2]), Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), Integer.parseInt(parts[5])));
+              AssignmentList.add(new Assignment(parts[1],
+                  LocalDate.parse(parts[2]),
+                  Integer.parseInt(parts[3]),
+                  Integer.parseInt(parts[4]), 
+                  Integer.parseInt(parts[5])));
               break;
 
             case "Project":
-              AssignmentList.add(new Project(parts[1], LocalDate.parse(parts[2]), Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), Boolean.valueOf(parts[5])));
+              AssignmentList.add(new Project(parts[1], 
+                  LocalDate.parse(parts[2]), 
+                  Integer.parseInt(parts[3]),
+                  Integer.parseInt(parts[4]), 
+                  Boolean.valueOf(parts[5])));
               break;
 
             case "Reading":
-            AssignmentList.add(new Reading(parts[1], LocalDate.parse(parts[2]), Integer.parseInt(parts[3]),
-                Integer.parseInt(parts[4]), Integer.parseInt(parts[5])));
+              AssignmentList.add(new Reading(parts[1], 
+                  LocalDate.parse(parts[2]), 
+                  Integer.parseInt(parts[3]),
+                  Integer.parseInt(parts[4]), 
+                  Integer.parseInt(parts[5])));
               break;
 
             case "Paper":
-              AssignmentList.add(new Paper(parts[1], LocalDate.parse(parts[2]), Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), Integer.parseInt(parts[5])));
+              AssignmentList.add(new Paper(parts[1],
+                  LocalDate.parse(parts[2]), 
+                  Integer.parseInt(parts[3]),
+                  Integer.parseInt(parts[4]), 
+                  Integer.parseInt(parts[5])));
               break;
 
             default:
@@ -65,10 +83,7 @@ public class Organizer {
 
         }
         sortAssignments();
-        System.out.println("Current Assignments:");
-        for (int i = 0; i < AssignmentList.size(); i++) {
-          System.out.println(i + 1 + ") " + AssignmentList.get(i).printByName());
-        }
+        showAssignments();
       }
 
     }
@@ -88,10 +103,7 @@ public class Organizer {
           break;
 
         case "show":
-          System.out.println("Current Assignments:");
-          for (int i = 0; i < AssignmentList.size(); i++) {
-            System.out.println(i + 1 + ") " + AssignmentList.get(i).printByName());
-          }
+          showAssignments();
           break;
 
         case "remove":
@@ -113,14 +125,28 @@ public class Organizer {
     }
   }
 
-  // Sorts Assignments (descending) based on power.
+  /**
+   *  Sorts Assignments (descending) based on power.
+   */
   public static void sortAssignments() {
 
     Collections.sort(AssignmentList);
     Collections.reverse(AssignmentList);
   }
+  
+  /**
+   * Display current assignments on the list.
+   */
+  public static void showAssignments() {
+    System.out.println("Current Assignments:");
+    for (int i = 0; i < AssignmentList.size(); i++) {
+      System.out.println(i + 1 + ") " + AssignmentList.get(i).printByName());
+    }
+  }
 
-  // Add a new assignment to the list
+  /**
+   *  Add a new assignment to the list.
+   */
   public static void addToList() {
     String tmp;
     String[] parts;
@@ -132,38 +158,54 @@ public class Organizer {
 
       case "assignment":
         System.out.println(
-          "Please write the Assignment's name, due date(YYYY-MM-DD), priority, difficulty, and estimated completion time separated by spaces.");
+            "Please write the Assignment's name, due date(YYYY-MM-DD), priority, difficulty,"
+            + " and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Assignment(parts[0], LocalDate.parse(parts[1]), Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), Integer.parseInt(parts[4])));
+        AssignmentList.add(new Assignment(parts[0], 
+            LocalDate.parse(parts[1]),
+            Integer.parseInt(parts[2]),
+            Integer.parseInt(parts[3]),
+            Integer.parseInt(parts[4])));
         break;
 
       case "project":
         System.out.println(
-          "Please write the Project's name, due date(YYYY-MM-DD), priority, difficulty, and partners(true/false) separated by spaces.");
+            "Please write the Project's name, due date(YYYY-MM-DD), priority, difficulty,"
+            + " and partners(true/false) separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Project(parts[0], LocalDate.parse(parts[1]), Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), Boolean.valueOf(parts[4])));
+        AssignmentList.add(new Project(parts[0],
+            LocalDate.parse(parts[1]), 
+            Integer.parseInt(parts[2]),
+            Integer.parseInt(parts[3]), 
+            Boolean.valueOf(parts[4])));
         break;
 
       case "reading":
         System.out.println(
-          "Please write the Reading's name, due date(YYYY-MM-DD), priority, length in pages, and estimated completion time separated by spaces.");
+            "Please write the Reading's name, due date(YYYY-MM-DD), priority, length in pages,"
+            + " and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Reading(parts[0], LocalDate.parse(parts[1]), Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), Integer.parseInt(parts[4])));
+        AssignmentList.add(new Reading(parts[0], 
+            LocalDate.parse(parts[1]),
+            Integer.parseInt(parts[2]),
+            Integer.parseInt(parts[3]), 
+            Integer.parseInt(parts[4])));
         break;
 
       case "paper":
         System.out.println(
-          "Please write the Paper's name, due date(YYYY-MM-DD), priority, length in pages, and estimated completion time separated by spaces.");
+            "Please write the Paper's name, due date(YYYY-MM-DD), priority, length in pages, "
+            + "and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Paper(parts[0], LocalDate.parse(parts[1]), Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), Integer.parseInt(parts[4])));
+        AssignmentList.add(new Paper(parts[0], 
+            LocalDate.parse(parts[1]), 
+            Integer.parseInt(parts[2]),
+            Integer.parseInt(parts[3]), 
+            Integer.parseInt(parts[4])));
         break;
 
       default:
@@ -172,7 +214,9 @@ public class Organizer {
     }
   }
 
-  // Remove an assignment from the list
+  /**
+   *  Remove an assignment from the list.
+   */
   public static void removeFromList() {
     System.out.println("What is the name of the assignment you would like to remove?");
     String input = scan.nextLine();
@@ -191,9 +235,16 @@ public class Organizer {
     }
   }
 
-  // Writes the Current AssignmentList to Assignments.txt
-  public static void updateTxtFile() throws UnsupportedEncodingException, FileNotFoundException, IOException {
-    try (Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Assignments.txt"), "utf-8"))) {
+  /**
+   *  Writes the Current AssignmentList to Assignments.txt
+   * @throws UnsupportedEncodingException e
+   * @throws FileNotFoundException e
+   * @throws IOException e
+   */
+  public static void updateTxtFile() throws UnsupportedEncodingException, 
+      FileNotFoundException, IOException {
+    try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+          new FileOutputStream("Assignments.txt"), "utf-8"))) {
       for (int i = 0; i < AssignmentList.size(); i++) {
         writer.write(AssignmentList.get(i).toString());
         writer.write(System.getProperty("line.separator"));

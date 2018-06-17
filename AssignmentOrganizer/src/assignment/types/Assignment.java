@@ -1,15 +1,28 @@
-package AssignmentTypes;
+package assignment.types;
 
 import java.time.LocalDate;
 
 
-//Class Assignment. Assignment Object with parameters for name, difficulty, completion time, due date, and priority. Power is position in queue.
-public class Assignment extends superAssignment{
+/**
+ * Class Assignment. Assignment Object with parameters for name, difficulty, 
+ * completion time, due date, and priority. Power is position in queue.
+ * 
+ * @author Adam
+ *
+ */
+public class Assignment extends SuperAssignment{
 
   private int difficulty;
   private int completionTime;
 
-  // Public Constructor
+  /**
+   *  Public Constructor.
+   * @param nam name
+   * @param due dueDate
+   * @param prior priority
+   * @param diff difficulty
+   * @param comp completion time
+   */
   public Assignment(String nam, LocalDate due, int prior, int diff, int comp) {
     
     super(nam, due, prior);
