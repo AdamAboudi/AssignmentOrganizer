@@ -1,4 +1,11 @@
 
 
+# Ignore Eclipse
+.checkstyle
+.project
+.classpath
+.settings/
+bin/
+
 #Ignore Assignments.txt
 Assignments.txt
