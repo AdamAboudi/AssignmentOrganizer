@@ -2,10 +2,15 @@
 
 # Ignore Eclipse
 .checkstyle
+.metadata
 .project
 .classpath
 .settings/
-bin/
+/bin/
+bin/**
+/build/
+*.class
+target/
 
 #Ignore Assignments.txt
 Assignments.txt
