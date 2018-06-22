@@ -109,6 +109,7 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
 
   }
   
+  //Print by name only
   public String printByName() {
     return this.name;
   }

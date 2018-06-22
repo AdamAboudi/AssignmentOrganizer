@@ -1,12 +1,13 @@
 
 
 # Ignore Eclipse
-.checkstyle
+
+*.checkstyle
 .metadata
 .project
-.classpath
+*.classpath
 .settings/
-/bin/
+bin/
 bin/**
 /build/
 *.class
@@ -14,3 +15,4 @@ target/
 
 #Ignore Assignments.txt
 Assignments.txt
+assignments.json
