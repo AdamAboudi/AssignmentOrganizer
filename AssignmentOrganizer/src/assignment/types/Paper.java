@@ -24,10 +24,10 @@ public class Paper extends SuperAssignment {
    * @param len Length
    * @param comp Completion Time
    */
-  public Paper(String nam, LocalDate due, int prior, long len, int comp) {
+  public Paper(String type, String nam, LocalDate due, int prior, long len, int comp) {
       
-    super(nam, due, prior);
-      
+    super(type, nam, due, prior);
+    type = "Paper";  
     length = len;
     completionTime = comp;
     priority = prior;
@@ -66,7 +66,7 @@ public class Paper extends SuperAssignment {
    
   @Override
    public String toString() {
-    return "Paper " + super.toString() + this.length + " " + this.completionTime;
+    return this.type + " " + super.toString() + this.length + " " + this.completionTime;
   }
 
 

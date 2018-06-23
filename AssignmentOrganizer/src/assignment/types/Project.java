@@ -23,10 +23,11 @@ public class Project extends SuperAssignment{
    * @param diff Difficulty
    * @param part Partners (boolean)
    */
-  public Project(String nam, LocalDate due, int prior, int diff, boolean part) {
+  public Project(String type, String nam, LocalDate due, int prior, int diff, boolean part) {
     
-    super(nam, due, prior);
+    super(type, nam, due, prior);
     difficulty = diff;
+    type = "Project";
     partners = part;
     this.setPow(projectPow());
   }
@@ -66,7 +67,7 @@ public class Project extends SuperAssignment{
   
   @Override
   public String toString() {
-    return "Project " + super.toString() + this.difficulty + " " + this.partners;
+    return this.type + " " + super.toString() + this.difficulty + " " + this.partners;
   }
 
 }

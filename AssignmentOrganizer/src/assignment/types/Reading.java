@@ -23,9 +23,10 @@ public class Reading extends SuperAssignment{
    * @param len Length
    * @param comp Completion Time
    */
-  public Reading(String nam, LocalDate due, int prior, long len, int comp) {
+  public Reading(String type, String nam, LocalDate due, int prior, long len, int comp) {
     
-    super(nam, due, prior);
+    super(type, nam, due, prior);
+    type = "Reading";
     length = len;
     completionTime = comp;
     this.setPow(readingPow());
@@ -58,7 +59,7 @@ public class Reading extends SuperAssignment{
 
   @Override
     public String toString() {
-    return "Reading " + super.toString() + this.length + " " + this.completionTime;
+    return this.type + " " + super.toString() + this.length + " " + this.completionTime;
   }
 
 }

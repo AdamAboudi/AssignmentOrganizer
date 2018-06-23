@@ -1,98 +1,71 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import assignment.types.*;
+
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
-import assignment.types.*;
 
-import java.io.FileNotFoundException;
+
+
 
 public class Organizer {
 
   private static Scanner scan = new Scanner(System.in);
   private static ArrayList<SuperAssignment> AssignmentList = new ArrayList<SuperAssignment>();
 
+  private static final Gson gson = new Gson(); 
+  
+  static Path assignmentPath;
+  
   /**
    * Main method.
    * @param args arguments (none)
    * @throws IOException e
    */
+
   public static void main(String[] args) throws IOException {
-
-    File assignments = new File("Assignments.txt");
-    assignments.createNewFile();
-
-    try (BufferedReader br = new BufferedReader(new FileReader(assignments))) {
-      String line;
-
-      if ((line = br.readLine()) == null) {
-        System.out.println("No current assignments");
-      } else {
-        while ((line = br.readLine()) != null) {
-          String[] parts = line.split(" ");
-
-          switch (parts[0]) {
-
-            case "Assignment":
-              AssignmentList.add(new Assignment(parts[1],
-                  LocalDate.parse(parts[2]),
-                  Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), 
-                  Integer.parseInt(parts[5])));
-              break;
-
-            case "Project":
-              AssignmentList.add(new Project(parts[1], 
-                  LocalDate.parse(parts[2]), 
-                  Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), 
-                  Boolean.valueOf(parts[5])));
-              break;
-
-            case "Reading":
-              AssignmentList.add(new Reading(parts[1], 
-                  LocalDate.parse(parts[2]), 
-                  Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), 
-                  Integer.parseInt(parts[5])));
-              break;
-
-            case "Paper":
-              AssignmentList.add(new Paper(parts[1],
-                  LocalDate.parse(parts[2]), 
-                  Integer.parseInt(parts[3]),
-                  Integer.parseInt(parts[4]), 
-                  Integer.parseInt(parts[5])));
-              break;
-
-            default:
-              System.out.println("Invalid Text File Entry");
-              break;
-          }
-
-        }
-        sortAssignments();
-        showAssignments();
-      }
-
+    File file = new File("assignments.json");
+    file.createNewFile();
+    assignmentPath =  Paths.get(file.getAbsolutePath());
+    
+    JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
+    SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
+    
+    if (readAsArray != null) { 
+      AssignmentList = new ArrayList<SuperAssignment>(Arrays.asList(readAsArray));
+      sortAssignments();
+      showAssignments();
     }
+    
+    runLoop();  
 
-    System.out.println("*********************************");
-
-    System.out.println("What would you like to do? Options: Add, Remove, Quit, Show");
-
+  
+  }
+  
+  /**
+   * Run the main loop of the program.
+   */
+  public static void runLoop() {
+    
     while (true) {
+      System.out.println("*********************************");
+      System.out.println("What would you like to do? Options: Add, Remove, Quit");
+      
       String input = scan.nextLine();
       input = input.toLowerCase();
       switch (input) {
@@ -102,17 +75,22 @@ public class Organizer {
           sortAssignments();
           break;
 
-        case "show":
-          showAssignments();
-          break;
-
         case "remove":
           removeFromList();
           sortAssignments();
           break;
 
         case "quit":
-          updateTxtFile();
+          try {
+            updateFile();
+          } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+          } catch (FileNotFoundException e) {
+            e.printStackTrace();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          
           System.exit(0);
           break;
 
@@ -121,7 +99,6 @@ public class Organizer {
           break;
 
       }
-      System.out.println("What would you like to do? Options: Add, Remove, Quit, Show");
     }
   }
 
@@ -138,9 +115,13 @@ public class Organizer {
    * Display current assignments on the list.
    */
   public static void showAssignments() {
-    System.out.println("Current Assignments:");
-    for (int i = 0; i < AssignmentList.size(); i++) {
-      System.out.println(i + 1 + ") " + AssignmentList.get(i).printByName());
+    if (AssignmentList.size() == 0) {
+      System.out.println("No current assignments");
+    } else {
+      System.out.println("Current Assignments:");
+      for (int i = 0; i < AssignmentList.size(); i++) {
+        System.out.println(i + 1 + ") " + AssignmentList.get(i).printByName());
+      }
     }
   }
 
@@ -150,7 +131,8 @@ public class Organizer {
   public static void addToList() {
     String tmp;
     String[] parts;
-    System.out.println("What type of assignment would you like to add?");
+    System.out.println("What type of assignment would you like to add? Options:"
+        + " Assigment, Paper, Project, Reading");
     String input = scan.nextLine();
     input = input.toLowerCase();
 
@@ -162,11 +144,14 @@ public class Organizer {
             + " and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Assignment(parts[0], 
+        AssignmentList.add(new Assignment("Assignment",
+            parts[0], 
             LocalDate.parse(parts[1]),
             Integer.parseInt(parts[2]),
             Integer.parseInt(parts[3]),
             Integer.parseInt(parts[4])));
+        
+        System.out.println("Assignment " + parts[0] + " added to list");
         break;
 
       case "project":
@@ -175,11 +160,13 @@ public class Organizer {
             + " and partners(true/false) separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Project(parts[0],
+        AssignmentList.add(new Project("Project",
+            parts[0],
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
             Integer.parseInt(parts[3]), 
             Boolean.valueOf(parts[4])));
+        System.out.println("Project " + parts[0] + " added to list");
         break;
 
       case "reading":
@@ -188,11 +175,13 @@ public class Organizer {
             + " and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Reading(parts[0], 
+        AssignmentList.add(new Reading("Reading",
+            parts[0], 
             LocalDate.parse(parts[1]),
             Integer.parseInt(parts[2]),
             Integer.parseInt(parts[3]), 
             Integer.parseInt(parts[4])));
+        System.out.println("Reading " + parts[0] + " added to list");
         break;
 
       case "paper":
@@ -201,16 +190,28 @@ public class Organizer {
             + "and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
-        AssignmentList.add(new Paper(parts[0], 
+        AssignmentList.add(new Paper("Paper",
+            parts[0], 
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
             Integer.parseInt(parts[3]), 
             Integer.parseInt(parts[4])));
+        System.out.println("Paper " + parts[0] + " added to list");
         break;
 
       default:
         System.out.println("Invalid Entry");
         break;
+    }
+    showAssignments();
+    try {
+      updateFile();
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
@@ -233,23 +234,36 @@ public class Organizer {
     if (!found) {
       System.out.println(input + " not found in AssignmentList");
     }
+    
+    showAssignments();
+    try {
+      updateFile();
+    } catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
   }
 
   /**
-   *  Writes the Current AssignmentList to Assignments.txt
+   *  Writes the Current AssignmentList to Assignments.json
    * @throws UnsupportedEncodingException e
    * @throws FileNotFoundException e
    * @throws IOException e
    */
-  public static void updateTxtFile() throws UnsupportedEncodingException, 
+  public static void updateFile() throws UnsupportedEncodingException, 
       FileNotFoundException, IOException {
-    try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-          new FileOutputStream("Assignments.txt"), "utf-8"))) {
-      for (int i = 0; i < AssignmentList.size(); i++) {
-        writer.write(AssignmentList.get(i).toString());
-        writer.write(System.getProperty("line.separator"));
-
-      }
+ 
+    try (FileWriter filex = new FileWriter(assignmentPath.toString())) {
+      SuperAssignment[] asArray = AssignmentList.toArray(
+          new SuperAssignment[AssignmentList.size()]);
+      String json = gson.toJson(asArray);
+      filex.write(json);
+  
     }
+     
   }
 }

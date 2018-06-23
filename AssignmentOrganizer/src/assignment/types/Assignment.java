@@ -23,10 +23,9 @@ public class Assignment extends SuperAssignment{
    * @param diff difficulty
    * @param comp completion time
    */
-  public Assignment(String nam, LocalDate due, int prior, int diff, int comp) {
+  public Assignment(String type, String nam, LocalDate due, int prior, int diff, int comp) {
     
-    super(nam, due, prior);
-    
+    super(type, nam, due, prior);
     difficulty = diff;
     completionTime = comp;
     this.setPow(assignmentPow());
@@ -62,7 +61,7 @@ public class Assignment extends SuperAssignment{
     
   @Override
     public String toString() {
-    return "Assignment " + super.toString() + this.difficulty + " " + this.completionTime;
+    return this.type + " " + super.toString() + this.difficulty + " " + this.completionTime;
   }
     
 

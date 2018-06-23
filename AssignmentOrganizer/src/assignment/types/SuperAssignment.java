@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 public class SuperAssignment implements Comparable<SuperAssignment> {
 
   public String name;
+  public String type;
   public LocalDate dueDate;
   public long daysLeft;
   public int priority;
@@ -18,9 +19,11 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
    * @param nam Name
    * @param due DueDate
    * @param prior Priority
+   * @param type Type of Assignment
    */
-  public SuperAssignment(String nam, LocalDate due, int prior) {
+  public SuperAssignment(String typ, String nam, LocalDate due, int prior) {
     name = nam;
+    type = typ;
     dueDate = due;
     priority = prior;
     daysPow = 0;
@@ -95,6 +98,15 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
 
   public void setName(String name) {
     this.name = name;
+  }
+  
+  public String getType() {
+    return type;
+  }
+
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public  String toString() {
