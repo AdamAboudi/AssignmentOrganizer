@@ -115,6 +115,7 @@ public class Organizer {
    * Display current assignments on the list.
    */
   public static void showAssignments() {
+    System.out.println("*********************************");
     if (AssignmentList.size() == 0) {
       System.out.println("No current assignments");
     } else {
@@ -144,6 +145,10 @@ public class Organizer {
             + " and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
+        if (parts.length != 5) {
+          System.out.println("Invalid Entry");
+          break;
+        }
         AssignmentList.add(new Assignment("Assignment",
             parts[0], 
             LocalDate.parse(parts[1]),
@@ -160,6 +165,10 @@ public class Organizer {
             + " and partners(true/false) separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
+        if (parts.length != 5) {
+          System.out.println("Invalid Entry");
+          break;
+        }
         AssignmentList.add(new Project("Project",
             parts[0],
             LocalDate.parse(parts[1]), 
@@ -175,6 +184,10 @@ public class Organizer {
             + " and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
+        if (parts.length != 5) {
+          System.out.println("Invalid Entry");
+          break;
+        }
         AssignmentList.add(new Reading("Reading",
             parts[0], 
             LocalDate.parse(parts[1]),
@@ -190,6 +203,10 @@ public class Organizer {
             + "and estimated completion time separated by spaces.");
         tmp = scan.nextLine();
         parts = tmp.split(" ");
+        if (parts.length != 5) {
+          System.out.println("Invalid Entry");
+          break;
+        }
         AssignmentList.add(new Paper("Paper",
             parts[0], 
             LocalDate.parse(parts[1]), 
