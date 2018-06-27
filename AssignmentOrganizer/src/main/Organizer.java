@@ -133,92 +133,142 @@ public class Organizer {
     String tmp;
     String[] parts;
     System.out.println("What type of assignment would you like to add? Options:"
-        + " Assigment, Paper, Project, Reading");
+        + " Assigment, Paper, Project, or Reading. Use Return to go back.");
     String input = scan.nextLine();
     input = input.toLowerCase();
 
-    switch (input) {
+    boolean validEntry = false;
+    
+    while (!validEntry) {
+      
+    
+      switch (input) {
 
-      case "assignment":
-        System.out.println(
-            "Please write the Assignment's name, due date(YYYY-MM-DD), priority, difficulty,"
-            + " and estimated completion time separated by spaces.");
-        tmp = scan.nextLine();
-        parts = tmp.split(" ");
-        if (parts.length != 5) {
-          System.out.println("Invalid Entry");
+        case "return":
+          validEntry = true;
           break;
-        }
-        AssignmentList.add(new Assignment("Assignment",
-            parts[0], 
-            LocalDate.parse(parts[1]),
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]),
-            Integer.parseInt(parts[4])));
+          
+        case "assignment":
+          System.out.println(
+                "Please write the Assignment's name, due date(YYYY-MM-DD), priority, difficulty,"
+                    + " and estimated completion time separated by spaces."
+                    + " Enter \"Return\" to go back to main.");
+          tmp = scan.nextLine();
+          parts = tmp.split(" ");
+          if (parts.length == 1) {
+            if (parts[0].equals("return")) {
+              validEntry = true;
+              break;
+            }
+          }
+          if (parts.length != 5) {
+            System.out.println("Invalid Entry");
+            break;
+          }
+          
+          validEntry = true;
+          AssignmentList.add(new Assignment("Assignment",
+              parts[0], 
+              LocalDate.parse(parts[1]),
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]),
+              Integer.parseInt(parts[4])));
         
-        System.out.println("Assignment " + parts[0] + " added to list");
-        break;
-
-      case "project":
-        System.out.println(
-            "Please write the Project's name, due date(YYYY-MM-DD), priority, difficulty,"
-            + " and partners(true/false) separated by spaces.");
-        tmp = scan.nextLine();
-        parts = tmp.split(" ");
-        if (parts.length != 5) {
-          System.out.println("Invalid Entry");
+          System.out.println("Assignment " + parts[0] + " added to list");
           break;
-        }
-        AssignmentList.add(new Project("Project",
-            parts[0],
-            LocalDate.parse(parts[1]), 
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Boolean.valueOf(parts[4])));
-        System.out.println("Project " + parts[0] + " added to list");
-        break;
 
-      case "reading":
-        System.out.println(
-            "Please write the Reading's name, due date(YYYY-MM-DD), priority, length in pages,"
-            + " and estimated completion time separated by spaces.");
-        tmp = scan.nextLine();
-        parts = tmp.split(" ");
-        if (parts.length != 5) {
-          System.out.println("Invalid Entry");
+        case "project":
+          System.out.println(
+              "Please write the Project's name, due date(YYYY-MM-DD), priority, difficulty,"
+                  + " and partners(true/false) separated by spaces. "
+                  + "Enter \"Return\" to go back to main.");
+          tmp = scan.nextLine();
+          parts = tmp.split(" ");
+          if (parts.length == 1) {
+            if (parts[0].equals("return")) {
+              validEntry = true;
+              break;
+            }
+          }
+          if (parts.length != 5) {
+            System.out.println("Invalid Entry");
+            break;
+          }
+          
+          validEntry = true;
+          AssignmentList.add(new Project("Project",
+              parts[0],
+              LocalDate.parse(parts[1]), 
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Boolean.valueOf(parts[4])));
+          System.out.println("Project " + parts[0] + " added to list");
           break;
-        }
-        AssignmentList.add(new Reading("Reading",
-            parts[0], 
-            LocalDate.parse(parts[1]),
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Integer.parseInt(parts[4])));
-        System.out.println("Reading " + parts[0] + " added to list");
-        break;
 
-      case "paper":
-        System.out.println(
-            "Please write the Paper's name, due date(YYYY-MM-DD), priority, length in pages, "
-            + "and estimated completion time separated by spaces.");
-        tmp = scan.nextLine();
-        parts = tmp.split(" ");
-        if (parts.length != 5) {
-          System.out.println("Invalid Entry");
+        case "reading":
+          System.out.println(
+              "Please write the Reading's name, due date(YYYY-MM-DD), priority, length in pages,"
+                  + " and estimated completion time separated by spaces. "
+                  + "Enter \"Return\" to go back to main.");
+          tmp = scan.nextLine();
+          parts = tmp.split(" ");
+          if (parts.length == 1) {
+            if (parts[0].equals("return")) {
+              validEntry = true;
+              break;
+            }
+          }
+          if (parts.length != 5) {
+            System.out.println("Invalid Entry");
+            break;
+          }
+          
+          validEntry = true;
+          AssignmentList.add(new Reading("Reading",
+              parts[0], 
+              LocalDate.parse(parts[1]),
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Integer.parseInt(parts[4])));
+          System.out.println("Reading " + parts[0] + " added to list");
           break;
-        }
-        AssignmentList.add(new Paper("Paper",
-            parts[0], 
-            LocalDate.parse(parts[1]), 
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Integer.parseInt(parts[4])));
-        System.out.println("Paper " + parts[0] + " added to list");
-        break;
 
-      default:
-        System.out.println("Invalid Entry");
-        break;
+        case "paper":
+          System.out.println(
+              "Please write the Paper's name, due date(YYYY-MM-DD), priority, length in pages, "
+                  + "and estimated completion time separated by spaces. "
+                  + "Enter \"Return\" to go back to main.");
+          tmp = scan.nextLine();
+          parts = tmp.split(" ");
+          if (parts.length == 1) {
+            if (parts[0].equals("return")) {
+              validEntry = true;
+              break;
+            }
+          }
+          if (parts.length != 5) {
+            System.out.println("Invalid Entry");
+            break;
+          }
+        
+          validEntry = true;
+          AssignmentList.add(new Paper("Paper",
+              parts[0], 
+              LocalDate.parse(parts[1]), 
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Integer.parseInt(parts[4])));
+          System.out.println("Paper " + parts[0] + " added to list");
+          break;
+
+        default:
+          System.out.println("Invalid Entry");
+          System.out.println("What type of assignment would you like to add? Options:"
+              + " Assigment, Paper, Project, or Reading. Use Return to go back.");
+          input = scan.nextLine();
+          input = input.toLowerCase();
+          break;
+      }
     }
     showAssignments();
     try {
