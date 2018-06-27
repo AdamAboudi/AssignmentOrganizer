@@ -19,7 +19,7 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
    * @param nam Name
    * @param due DueDate
    * @param prior Priority
-   * @param type Type of Assignment
+   * @param typ Type of Assignment
    */
   public SuperAssignment(String typ, String nam, LocalDate due, int prior) {
     name = nam;
