@@ -13,6 +13,5 @@ bin/**
 *.class
 target/
 
-#Ignore Assignments.txt
-Assignments.txt
+#Ignore Assignments.json
 assignments.json
