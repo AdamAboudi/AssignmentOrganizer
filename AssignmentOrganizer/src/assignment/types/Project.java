@@ -58,16 +58,16 @@ public class Project extends SuperAssignment{
    */
   public int projectPow() {
     if (partners) {
-      return (int) (this.difficulty  + 10 + this.daysPow + this.priority);  
+      return (int) (this.difficulty  + 10 + this.getDaysPow() + this.getPriority());  
     } else {
-      return (int) (this.difficulty  + this.daysPow + this.priority);
+      return (int) (this.difficulty  + this.getDaysPow() + this.getPriority());
 
     }
   }
   
   @Override
   public String toString() {
-    return this.type + " " + super.toString() + this.difficulty + " " + this.partners;
+    return this.getType() + " " + super.toString() + this.difficulty + " " + this.partners;
   }
 
 }

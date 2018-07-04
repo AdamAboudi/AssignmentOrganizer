@@ -5,13 +5,13 @@ import java.time.temporal.ChronoUnit;
 
 public class SuperAssignment implements Comparable<SuperAssignment> {
 
-  public String name;
-  public String type;
-  public LocalDate dueDate;
-  public long daysLeft;
-  public int priority;
-  public int pow;
-  public double daysPow;
+  private String name;
+  private String type;
+  private LocalDate dueDate;
+  private long daysLeft;
+  private int priority;
+  private int pow;
+  private double daysPow;
 
   /**
    *  Public Constructor.
@@ -25,8 +25,8 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     name = nam;
     type = typ;
     dueDate = due;
-    priority = prior;
-    daysPow = 0;
+    setPriority(prior);
+    setDaysPow(0);
     daysLeft = daysLeft();
     pow = 0;
     
@@ -43,7 +43,7 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     LocalDate now = LocalDate.now();
     long dura = ChronoUnit.DAYS.between(now, dueDate);
     double temp = (double) dura;
-    daysPow = Math.pow(2, (-temp + 9));
+    setDaysPow(Math.pow(2, (-temp + 9)));
     return dura;
   }
   
@@ -71,12 +71,12 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
   }
 
   // Set priority
-  public void setpriority(int priority) {
+  public void setPriority(int priority) {
     this.priority = priority;
   }
 
   // Return priority
-  public int getpriority() {
+  public int getPriority() {
     return priority;
   }
 
@@ -124,6 +124,16 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
   //Print by name only
   public String printByName() {
     return this.name;
+  }
+
+
+  public double getDaysPow() {
+    return daysPow;
+  }
+
+
+  public void setDaysPow(double daysPow) {
+    this.daysPow = daysPow;
   }
 
 }

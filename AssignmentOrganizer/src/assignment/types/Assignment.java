@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * @author Adam
  *
  */
-public class Assignment extends SuperAssignment{
+public class Assignment extends SuperAssignment {
 
   private int difficulty;
   private int completionTime;
@@ -56,12 +56,13 @@ public class Assignment extends SuperAssignment{
 
   //Calculate power for an assignment
   public int assignmentPow() {
-    return (int) (this.difficulty  + this.completionTime + this.daysPow + this.priority * 3);
+    return (int) (this.difficulty  + this.completionTime + this.getDaysPow() 
+      + this.getPriority() * 3);
   }
     
   @Override
     public String toString() {
-    return this.type + " " + super.toString() + this.difficulty + " " + this.completionTime;
+    return this.getType() + " " + super.toString() + this.difficulty + " " + this.completionTime;
   }
     
 

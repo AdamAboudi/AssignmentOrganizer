@@ -41,6 +41,8 @@ public class Organizer {
   public static void main(String[] args) throws IOException {
     File file = new File("assignments.json");
     file.createNewFile();
+    
+    
     assignmentPath =  Paths.get(file.getAbsolutePath());
     
     JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
@@ -72,12 +74,10 @@ public class Organizer {
 
         case "add":
           addToList();
-          sortAssignments();
           break;
 
         case "remove":
           removeFromList();
-          sortAssignments();
           break;
 
         case "quit":
@@ -169,6 +169,7 @@ public class Organizer {
           break;
       }
     }
+    sortAssignments();
     showAssignments();
     try {
       updateFile();
@@ -200,7 +201,7 @@ public class Organizer {
     if (!found) {
       System.out.println(input + " not found in AssignmentList");
     }
-    
+    sortAssignments();
     showAssignments();
     try {
       updateFile();

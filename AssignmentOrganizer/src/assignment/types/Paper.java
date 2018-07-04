@@ -30,7 +30,7 @@ public class Paper extends SuperAssignment {
     type = "Paper";  
     length = len;
     completionTime = comp;
-    priority = prior;
+    setPriority(prior);
     this.setPow(paperPow());
 
   }
@@ -61,12 +61,12 @@ public class Paper extends SuperAssignment {
    
   //Calculate power for a paper
   public int paperPow() {
-    return (int) (this.length   + this.completionTime + this.daysPow + this.priority * 3);
+    return (int) (this.length   + this.completionTime + this.getDaysPow() + this.getPriority() * 3);
   }
    
   @Override
    public String toString() {
-    return this.type + " " + super.toString() + this.length + " " + this.completionTime;
+    return this.getType() + " " + super.toString() + this.length + " " + this.completionTime;
   }
 
 
