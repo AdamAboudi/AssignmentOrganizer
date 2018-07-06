@@ -19,17 +19,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
-
-
-
-
 public class Organizer {
 
   private static Scanner scan = new Scanner(System.in);
   private static ArrayList<SuperAssignment> AssignmentList = new ArrayList<SuperAssignment>();
-
   private static final Gson gson = new Gson(); 
-  
   static Path assignmentPath;
   
   /**
@@ -37,14 +31,11 @@ public class Organizer {
    * @param args arguments (none)
    * @throws IOException e
    */
-
   public static void main(String[] args) throws IOException {
     File file = new File("assignments.json");
     file.createNewFile();
-    
-    
+      
     assignmentPath =  Paths.get(file.getAbsolutePath());
-    
     JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
     SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
     
@@ -52,11 +43,8 @@ public class Organizer {
       AssignmentList = new ArrayList<SuperAssignment>(Arrays.asList(readAsArray));
       sortAssignments();
       showAssignments();
-    }
-    
+    }    
     runLoop();  
-
-  
   }
   
   /**
@@ -65,9 +53,9 @@ public class Organizer {
   public static void runLoop() {
     
     while (true) {
+     
       System.out.println("*********************************");
-      System.out.println("What would you like to do? Options: Add, Remove, Quit");
-      
+      System.out.println("What would you like to do? Options: Add, Remove, Quit");  
       String input = scan.nextLine();
       input = input.toLowerCase();
       switch (input) {
@@ -89,8 +77,7 @@ public class Organizer {
             e.printStackTrace();
           } catch (IOException e) {
             e.printStackTrace();
-          }
-          
+          }       
           System.exit(0);
           break;
 
@@ -130,6 +117,7 @@ public class Organizer {
    *  Add a new assignment to the list.
    */
   public static void addToList() {
+  
     boolean validType = false;
     
     while (!validType) {
@@ -211,8 +199,7 @@ public class Organizer {
       e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
-    }
-    
+    }  
   }
 
   /**
@@ -228,10 +215,8 @@ public class Organizer {
       SuperAssignment[] asArray = AssignmentList.toArray(
           new SuperAssignment[AssignmentList.size()]);
       String json = gson.toJson(asArray);
-      filex.write(json);
-  
-    }
-     
+      filex.write(json); 
+    }    
   }
   
   /**
@@ -240,13 +225,11 @@ public class Organizer {
    * @return boolean on legality of date
    */
   public static boolean legalDate(LocalDate due) {
+  
     if (due.isBefore(LocalDate.now())) {
       return false;
     }
-    
-    
-    return true;
-    
+    return true; 
   }
   
   /**
@@ -258,7 +241,6 @@ public class Organizer {
     String[] parts;
     boolean validEntry = false;
     
-
     while (!validEntry) {
       
       System.out.println(
@@ -280,17 +262,13 @@ public class Organizer {
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
             Integer.parseInt(parts[3]), 
-            Boolean.valueOf(parts[4])));
-    
+            Boolean.valueOf(parts[4])));   
         System.out.println("Project " + parts[0] + " added to list");
         validEntry = true;
-
       } else {
         System.out.println("Invalid Entry");
-      }
-    
+      }    
     }
-
   }
   
   /**
@@ -302,7 +280,6 @@ public class Organizer {
     String[] parts;
     boolean validEntry = false;
     
-
     while (!validEntry) {
       
       System.out.println(
@@ -325,16 +302,13 @@ public class Organizer {
             Integer.parseInt(parts[2]),
             Integer.parseInt(parts[3]), 
             Integer.parseInt(parts[4])));
-    
         System.out.println("Paper " + parts[0] + " added to list");
         validEntry = true;
 
       } else {
         System.out.println("Invalid Entry");
-      }
-    
+      }    
     }
-
   }
   
   /**
@@ -344,9 +318,8 @@ public class Organizer {
     
     String tmp;
     String[] parts;
-    boolean validEntry = false;
+    boolean validEntry = false;    
     
-
     while (!validEntry) {
       
       System.out.println(
@@ -376,9 +349,7 @@ public class Organizer {
       } else {
         System.out.println("Invalid Entry");
       }
-    
     }
-
   }
   
   
@@ -390,8 +361,7 @@ public class Organizer {
     String tmp;
     String[] parts;
     boolean validEntry = false;
-    
-
+   
     while (!validEntry) {
       
       System.out.println(
@@ -420,12 +390,7 @@ public class Organizer {
 
       } else {
         System.out.println("Invalid Entry");
-      }
-    
+      }   
     }
-
-  }
-  
-  
-  
+  } 
 }
