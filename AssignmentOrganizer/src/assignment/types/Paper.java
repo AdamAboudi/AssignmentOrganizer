@@ -11,7 +11,6 @@ import java.time.LocalDate;
  */
 public class Paper extends SuperAssignment {
 
-
   private long length;
   private int completionTime;
 
@@ -32,10 +31,7 @@ public class Paper extends SuperAssignment {
     completionTime = comp;
     setPriority(prior);
     this.setPow(paperPow());
-
-  }
-
-   
+  }  
 
   // Set Estimated completion Time
   public void setcompletionTime(int completionTime) {
@@ -47,13 +43,9 @@ public class Paper extends SuperAssignment {
     return completionTime;
   }
 
-
   public long getLength() {
     return length;
   }
-
-
-
 
   public void setLength(int length) {
     this.length = length;
@@ -68,6 +60,4 @@ public class Paper extends SuperAssignment {
    public String toString() {
     return this.getType() + " " + super.toString() + this.length + " " + this.completionTime;
   }
-
-
 }

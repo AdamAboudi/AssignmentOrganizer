@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @author Adam
  *
  */
-public class Project extends SuperAssignment{
+public class Project extends SuperAssignment {
 
   private int difficulty;
   private boolean partners;
@@ -61,7 +61,6 @@ public class Project extends SuperAssignment{
       return (int) (this.difficulty  + 10 + this.getDaysPow() + this.getPriority());  
     } else {
       return (int) (this.difficulty  + this.getDaysPow() + this.getPriority());
-
     }
   }
   
@@ -69,5 +68,4 @@ public class Project extends SuperAssignment{
   public String toString() {
     return this.getType() + " " + super.toString() + this.difficulty + " " + this.partners;
   }
-
 }

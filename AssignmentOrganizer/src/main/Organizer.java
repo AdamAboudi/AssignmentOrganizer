@@ -1,6 +1,10 @@
 package main;
 
-import assignment.types.*;
+import assignment.types.Assignment;
+import assignment.types.Paper;
+import assignment.types.Project;
+import assignment.types.Reading;
+import assignment.types.SuperAssignment;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;

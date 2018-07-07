@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * @author Adam
  *
  */
-public class Reading extends SuperAssignment{
+public class Reading extends SuperAssignment {
 
   private long length;
   private int completionTime;
@@ -30,7 +30,6 @@ public class Reading extends SuperAssignment{
     length = len;
     completionTime = comp;
     this.setPow(readingPow());
-
   }
 
   // Set Estimated completion Time
@@ -61,5 +60,4 @@ public class Reading extends SuperAssignment{
     public String toString() {
     return this.getType() + " " + super.toString() + this.length + " " + this.completionTime;
   }
-
 }

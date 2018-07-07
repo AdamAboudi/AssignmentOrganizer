@@ -29,7 +29,6 @@ public class Assignment extends SuperAssignment {
     difficulty = diff;
     completionTime = comp;
     this.setPow(assignmentPow());
-
   }
 
   
@@ -64,6 +63,4 @@ public class Assignment extends SuperAssignment {
     public String toString() {
     return this.getType() + " " + super.toString() + this.difficulty + " " + this.completionTime;
   }
-    
-
 }

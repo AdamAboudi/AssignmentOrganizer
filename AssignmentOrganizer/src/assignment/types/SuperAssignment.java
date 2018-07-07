@@ -28,11 +28,9 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     setPriority(prior);
     setDaysPow(0);
     daysLeft = daysLeft();
-    pow = 0;
-    
+    pow = 0;   
   }
-  
-  
+    
   /**
    * Calculate days until due.
    * 
@@ -46,12 +44,10 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     setDaysPow(Math.pow(2, (-temp + 9)));
     return dura;
   }
-  
-  
+    
   //Return number of days left
   public long getDaysLeft() {
-    return daysLeft;
-    
+    return daysLeft;   
   }
 
   /**
@@ -62,7 +58,6 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
   public void setDueOn(LocalDate dueDate) {
     this.dueDate = dueDate;
     daysLeft = daysLeft();
-
   }
 
   // Return Due Date
@@ -90,11 +85,9 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     this.pow = pow;
   }
   
-
   public String getName() {
     return name;
   }
-
 
   public void setName(String name) {
     this.name = name;
@@ -104,7 +97,6 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     return type;
   }
 
-
   public void setType(String type) {
     this.type = type;
   }
@@ -113,12 +105,9 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     return this.name + " " + this.dueDate + " " + this.priority + " ";
   }
 
-
   @Override
   public int compareTo(SuperAssignment o) {
-
     return pow - o.getPow();
-
   }
   
   //Print by name only
@@ -126,14 +115,11 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
     return this.name;
   }
 
-
   public double getDaysPow() {
     return daysPow;
   }
 
-
   public void setDaysPow(double daysPow) {
     this.daysPow = daysPow;
   }
-
 }
