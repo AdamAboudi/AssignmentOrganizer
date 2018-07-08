@@ -2,7 +2,6 @@ package assignment.types;
 
 import java.time.LocalDate;
 
-
 /**
  * Class Assignment. Assignment Object with parameters for name, difficulty, 
  * completion time, due date, and priority. Power is position in queue.
@@ -30,8 +29,6 @@ public class Assignment extends SuperAssignment {
     completionTime = comp;
     this.setPow(assignmentPow());
   }
-
-  
 
   // Set Difficulty Parameter
   public void setDifficulty(int difficulty) {
