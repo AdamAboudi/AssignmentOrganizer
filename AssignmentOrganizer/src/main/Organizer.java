@@ -127,7 +127,7 @@ public class Organizer {
     while (!validType) {
 
       System.out.println("What type of assignment would you like to add? Options:"
-          + " Assigment, Paper, Project, or Reading. Use Return to go back.");
+          + " Assigment, Paper, Project, or Reading. Enter \"Return\" to go back.");
       String input = scan.nextLine();
       input = input.toLowerCase();
 
@@ -178,20 +178,31 @@ public class Organizer {
    *  Remove an assignment from the list.
    */
   public static void removeFromList() {
-    System.out.println("What is the name of the assignment you would like to remove?");
-    String input = scan.nextLine();
-    input = input.toLowerCase();
+    
     boolean found = false;
+    boolean validEntry = false;
 
-    for (int i = 0; i < AssignmentList.size(); i++) {
-      if (AssignmentList.get(i).getName().toLowerCase().equals(input)) {
-        AssignmentList.remove(i);
-        found = true;
-        System.out.println(input + " removed");
+    while (!validEntry) {
+      System.out.println("Enter the name of the assignment to remove."
+          + " Enter \"Return\" to go back.");
+      String input = scan.nextLine();
+      input = input.toLowerCase();
+      if (input.equals("return")) {
+        validEntry = true;
+        break;
       }
-    }
-    if (!found) {
-      System.out.println(input + " not found in AssignmentList");
+    
+      for (int i = 0; i < AssignmentList.size(); i++) {
+        if (AssignmentList.get(i).getName().toLowerCase().equals(input)) {
+          AssignmentList.remove(i);
+          found = true;
+          validEntry = true;
+          System.out.println(input + " removed");
+        }
+      }
+      if (!found) {
+        System.out.println(input + " not found in AssignmentList");
+      }
     }
     sortAssignments();
     showAssignments();
