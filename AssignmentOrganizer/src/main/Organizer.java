@@ -19,14 +19,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Organizer {
 
   private static Scanner scan = new Scanner(System.in);
-  private static ArrayList<SuperAssignment> AssignmentList = new ArrayList<SuperAssignment>();
+  static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
   private static final Gson gson = new Gson(); 
   static Path assignmentPath;
   
@@ -44,7 +44,10 @@ public class Organizer {
     SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
     
     if (readAsArray != null) { 
-      AssignmentList = new ArrayList<SuperAssignment>(Arrays.asList(readAsArray));
+      for (SuperAssignment assignment : readAsArray) {
+        AssignmentMap.put(assignment.getName(), assignment);
+      }
+      
       sortAssignments();
       showAssignments();
     }    
@@ -98,8 +101,10 @@ public class Organizer {
    */
   public static void sortAssignments() {
 
-    Collections.sort(AssignmentList);
-    Collections.reverse(AssignmentList);
+    ArrayList<SuperAssignment> assignmentList = 
+        new ArrayList<SuperAssignment>(AssignmentMap.values());
+    Collections.sort(assignmentList);
+    Collections.reverse(assignmentList);
   }
   
   /**
@@ -107,12 +112,14 @@ public class Organizer {
    */
   public static void showAssignments() {
     System.out.println("*********************************");
-    if (AssignmentList.size() == 0) {
+    ArrayList<SuperAssignment> assignmentList =
+        new ArrayList<SuperAssignment>(AssignmentMap.values());
+    if (assignmentList.size() == 0) {
       System.out.println("No current assignments");
     } else {
       System.out.println("Current Assignments:");
-      for (int i = 0; i < AssignmentList.size(); i++) {
-        System.out.println(i + 1 + ") " + AssignmentList.get(i).printByName());
+      for (int i = 0; i < assignmentList.size(); i++) {
+        System.out.println(i + 1 + ") " + assignmentList.get(i).printByName());
       }
     }
   }
@@ -179,7 +186,6 @@ public class Organizer {
    */
   public static void removeFromList() {
     
-    boolean found = false;
     boolean validEntry = false;
 
     while (!validEntry) {
@@ -191,16 +197,12 @@ public class Organizer {
         validEntry = true;
         break;
       }
-    
-      for (int i = 0; i < AssignmentList.size(); i++) {
-        if (AssignmentList.get(i).getName().toLowerCase().equals(input)) {
-          AssignmentList.remove(i);
-          found = true;
-          validEntry = true;
-          System.out.println(input + " removed");
-        }
-      }
-      if (!found) {
+      
+      if (AssignmentMap.containsKey(input)) {
+        AssignmentMap.remove(input);
+        validEntry = true;
+        System.out.println(input + " removed");
+      } else {
         System.out.println(input + " not found in AssignmentList");
       }
     }
@@ -225,11 +227,11 @@ public class Organizer {
    */
   public static void updateFile() throws UnsupportedEncodingException, 
       FileNotFoundException, IOException {
- 
+    
     try (FileWriter filex = new FileWriter(assignmentPath.toString())) {
-      SuperAssignment[] asArray = AssignmentList.toArray(
-          new SuperAssignment[AssignmentList.size()]);
-      String json = gson.toJson(asArray);
+      SuperAssignment[] temp = (SuperAssignment[]) AssignmentMap.values().toArray(
+          new SuperAssignment[AssignmentMap.size()]);
+      String json = gson.toJson(temp);
       filex.write(json); 
     }    
   }
@@ -272,7 +274,7 @@ public class Organizer {
       }
       if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentList.add(new Project("Project",
+        AssignmentMap.put(parts[0], new Project("Project",
             parts[0],
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
@@ -311,7 +313,7 @@ public class Organizer {
       }
       if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentList.add(new Paper("Project",
+        AssignmentMap.put(parts[0], new Paper("Project",
             parts[0],
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
@@ -351,7 +353,7 @@ public class Organizer {
       }
       if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentList.add(new Assignment("Project",
+        AssignmentMap.put(parts[0],new Assignment("Project",
             parts[0],
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
@@ -393,7 +395,7 @@ public class Organizer {
       }
       if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentList.add(new Reading("Project",
+        AssignmentMap.put(parts[0], new Reading("Project",
             parts[0],
             LocalDate.parse(parts[1]), 
             Integer.parseInt(parts[2]),
