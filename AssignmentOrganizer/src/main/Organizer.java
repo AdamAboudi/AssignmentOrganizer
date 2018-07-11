@@ -48,8 +48,7 @@ public class Organizer {
         AssignmentMap.put(assignment.getName(), assignment);
       }
       
-      sortAssignments();
-      showAssignments();
+      sortAndShow();
     }    
     runLoop();  
   }
@@ -99,21 +98,19 @@ public class Organizer {
   /**
    *  Sorts Assignments (descending) based on power.
    */
-  public static void sortAssignments() {
 
-    ArrayList<SuperAssignment> assignmentList = 
-        new ArrayList<SuperAssignment>(AssignmentMap.values());
-    Collections.sort(assignmentList);
-    Collections.reverse(assignmentList);
-  }
   
   /**
    * Display current assignments on the list.
    */
-  public static void showAssignments() {
+  public static void sortAndShow() {
     System.out.println("*********************************");
+    
     ArrayList<SuperAssignment> assignmentList =
         new ArrayList<SuperAssignment>(AssignmentMap.values());
+    Collections.sort(assignmentList);
+    Collections.reverse(assignmentList);
+    
     if (assignmentList.size() == 0) {
       System.out.println("No current assignments");
     } else {
@@ -168,8 +165,7 @@ public class Organizer {
           break;
       }
     }
-    sortAssignments();
-    showAssignments();
+    sortAndShow();
     try {
       updateFile();
     } catch (UnsupportedEncodingException e) {
@@ -206,8 +202,7 @@ public class Organizer {
         System.out.println(input + " not found in AssignmentList");
       }
     }
-    sortAssignments();
-    showAssignments();
+    sortAndShow();
     try {
       updateFile();
     } catch (UnsupportedEncodingException e) {
