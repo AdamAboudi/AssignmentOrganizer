@@ -109,7 +109,6 @@ public class Organizer {
     ArrayList<SuperAssignment> assignmentList =
         new ArrayList<SuperAssignment>(AssignmentMap.values());
     Collections.sort(assignmentList);
-    Collections.reverse(assignmentList);
     
     if (assignmentList.size() == 0) {
       System.out.println("No current assignments");

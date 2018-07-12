@@ -107,7 +107,7 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
 
   @Override
   public int compareTo(SuperAssignment o) {
-    return pow - o.getPow();
+    return -(pow - o.getPow());
   }
   
   //Print by name only
