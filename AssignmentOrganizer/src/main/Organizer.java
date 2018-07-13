@@ -18,6 +18,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -95,11 +96,6 @@ public class Organizer {
     }
   }
 
-  /**
-   *  Sorts Assignments (descending) based on power.
-   */
-
-  
   /**
    * Display current assignments on the list.
    */
@@ -266,19 +262,22 @@ public class Organizer {
           return;
         }
       }
-      if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
-      
-        AssignmentMap.put(parts[0], new Project("Project",
-            parts[0],
-            LocalDate.parse(parts[1]), 
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Boolean.valueOf(parts[4])));   
-        System.out.println("Project " + parts[0] + " added to list");
-        validEntry = true;
-      } else {
-        System.out.println("Invalid Entry");
-      }    
+      try {       
+        if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {     
+          AssignmentMap.put(parts[0], new Project("Project",
+              parts[0],
+              LocalDate.parse(parts[1]), 
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Boolean.valueOf(parts[4])));   
+          System.out.println("Project " + parts[0] + " added to list");
+          validEntry = true;
+        } else {
+          System.out.println("Invalid Entry");
+        }   
+      } catch (DateTimeParseException e) {
+        System.out.println("Invalid Date");
+      }
     }
   }
   
@@ -291,8 +290,7 @@ public class Organizer {
     String[] parts;
     boolean validEntry = false;
     
-    while (!validEntry) {
-      
+    while (!validEntry) {  
       System.out.println(
           "Please write the Paper's name, due date(YYYY-MM-DD), priority, length in pages, "
               + "and estimated completion time separated by spaces. "
@@ -305,20 +303,24 @@ public class Organizer {
           return;
         }
       }
-      if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
+      try {
+        if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentMap.put(parts[0], new Paper("Project",
-            parts[0],
-            LocalDate.parse(parts[1]), 
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Integer.parseInt(parts[4])));
-        System.out.println("Paper " + parts[0] + " added to list");
-        validEntry = true;
+          AssignmentMap.put(parts[0], new Paper("Project",
+              parts[0],
+              LocalDate.parse(parts[1]), 
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Integer.parseInt(parts[4])));
+          System.out.println("Paper " + parts[0] + " added to list");
+          validEntry = true;
 
-      } else {
-        System.out.println("Invalid Entry");
-      }    
+        } else {
+          System.out.println("Invalid Entry");
+        }   
+      } catch (DateTimeParseException e) {
+        System.out.println("Invalid Date");
+      }
     }
   }
   
@@ -345,20 +347,24 @@ public class Organizer {
           return;
         }
       }
-      if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
+      try {
+        if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentMap.put(parts[0],new Assignment("Project",
-            parts[0],
-            LocalDate.parse(parts[1]), 
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Integer.parseInt(parts[4])));
+          AssignmentMap.put(parts[0],new Assignment("Project",
+              parts[0],
+              LocalDate.parse(parts[1]), 
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Integer.parseInt(parts[4])));
     
-        System.out.println("Assignment " + parts[0] + " added to list");
-        validEntry = true;
+          System.out.println("Assignment " + parts[0] + " added to list");
+          validEntry = true;
 
-      } else {
-        System.out.println("Invalid Entry");
+        } else {
+          System.out.println("Invalid Entry");
+        }
+      } catch (DateTimeParseException e) {
+        System.out.println("Invalid Date");
       }
     }
   }
@@ -387,21 +393,25 @@ public class Organizer {
           return;
         }
       }
-      if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
+      try {
+        if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
       
-        AssignmentMap.put(parts[0], new Reading("Project",
-            parts[0],
-            LocalDate.parse(parts[1]), 
-            Integer.parseInt(parts[2]),
-            Integer.parseInt(parts[3]), 
-            Integer.parseInt(parts[4])));
+          AssignmentMap.put(parts[0], new Reading("Project",
+              parts[0],
+              LocalDate.parse(parts[1]), 
+              Integer.parseInt(parts[2]),
+              Integer.parseInt(parts[3]), 
+              Integer.parseInt(parts[4])));
     
-        System.out.println("Reading " + parts[0] + " added to list");
-        validEntry = true;
+          System.out.println("Reading " + parts[0] + " added to list");
+          validEntry = true;
 
-      } else {
-        System.out.println("Invalid Entry");
-      }   
+        } else {
+          System.out.println("Invalid Entry");
+        }  
+      } catch (DateTimeParseException e) {
+        System.out.println("Invalid Date");
+      }
     }
   } 
 }
