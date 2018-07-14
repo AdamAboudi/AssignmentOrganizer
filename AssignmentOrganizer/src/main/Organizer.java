@@ -277,6 +277,8 @@ public class Organizer {
         }   
       } catch (DateTimeParseException e) {
         System.out.println("Invalid Date");
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid Entry");
       }
     }
   }
@@ -320,6 +322,8 @@ public class Organizer {
         }   
       } catch (DateTimeParseException e) {
         System.out.println("Invalid Date");
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid Entry");
       }
     }
   }
@@ -365,6 +369,8 @@ public class Organizer {
         }
       } catch (DateTimeParseException e) {
         System.out.println("Invalid Date");
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid Entry");
       }
     }
   }
@@ -411,6 +417,8 @@ public class Organizer {
         }  
       } catch (DateTimeParseException e) {
         System.out.println("Invalid Date");
+      } catch (NumberFormatException e) {
+        System.out.println("Invalid Entry");
       }
     }
   } 
