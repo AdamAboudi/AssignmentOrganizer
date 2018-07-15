@@ -63,8 +63,7 @@ public class Organizer {
      
       System.out.println("*********************************");
       System.out.println("What would you like to do? Options: Add, Remove, Quit");  
-      String input = scan.nextLine();
-      input = input.toLowerCase();
+      String input = scan.nextLine().toLowerCase();
       switch (input) {
 
         case "add":
@@ -127,8 +126,7 @@ public class Organizer {
 
       System.out.println("What type of assignment would you like to add? Options:"
           + " Assigment, Paper, Project, or Reading. Enter \"Return\" to go back.");
-      String input = scan.nextLine();
-      input = input.toLowerCase();
+      String input = scan.nextLine().toLowerCase();
 
       switch (input) {
 
@@ -182,8 +180,7 @@ public class Organizer {
     while (!validEntry) {
       System.out.println("Enter the name of the assignment to remove."
           + " Enter \"Return\" to go back.");
-      String input = scan.nextLine();
-      input = input.toLowerCase();
+      String input = scan.nextLine().toLowerCase();
       if (input.equals("return")) {
         validEntry = true;
         break;
