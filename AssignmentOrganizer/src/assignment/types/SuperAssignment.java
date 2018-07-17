@@ -3,7 +3,7 @@ package assignment.types;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class SuperAssignment implements Comparable<SuperAssignment> {
+public abstract class SuperAssignment implements Comparable<SuperAssignment> {
 
   private String name;
   private String type;
