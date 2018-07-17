@@ -30,27 +30,22 @@ public class Assignment extends SuperAssignment {
     this.setPow(assignmentPow());
   }
 
-  // Set Difficulty Parameter
   public void setDifficulty(int difficulty) {
     this.difficulty = difficulty;
   }
 
-  // Return Difficulty Parameter
   public int getDifficulty() {
     return difficulty;
   }
 
-  // Set Estimated completion Time
   public void setcompletionTime(int completionTime) {
     this.completionTime = completionTime;
   }
 
-  // Return Estimated completion Time
   public int getcompletionTime() {
     return completionTime;
   }
 
-  //Calculate power for an assignment
   public int assignmentPow() {
     return (int) (this.difficulty  + this.completionTime + this.getDaysPow() 
       + this.getPriority() * 3);

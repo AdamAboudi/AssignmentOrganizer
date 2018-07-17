@@ -3,7 +3,7 @@ package assignment.types;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public abstract class SuperAssignment implements Comparable<SuperAssignment> {
+public class SuperAssignment implements Comparable<SuperAssignment> {
 
   private String name;
   private String type;
@@ -39,10 +39,9 @@ public abstract class SuperAssignment implements Comparable<SuperAssignment> {
   public long daysLeft() {
     
     LocalDate now = LocalDate.now();
-    long dura = ChronoUnit.DAYS.between(now, dueDate);
-    double temp = (double) dura;
-    setDaysPow(Math.pow(2, (-temp + 9)));
-    return dura;
+    double dura = ChronoUnit.DAYS.between(now, dueDate);
+    setDaysPow(Math.pow(2, (-dura + 9)));
+    return (long) dura;
   }
     
   //Return number of days left
