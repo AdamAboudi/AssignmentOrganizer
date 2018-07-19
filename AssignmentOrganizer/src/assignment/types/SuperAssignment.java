@@ -14,7 +14,7 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
   private double daysPow;
 
   /**
-   *  Public Constructor.
+   *  Public Constructor for SuperAssignment.
    * 
    * @param nam Name
    * @param due DueDate

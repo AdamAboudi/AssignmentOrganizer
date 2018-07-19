@@ -15,7 +15,7 @@ public class Assignment extends SuperAssignment {
   private int completionTime;
 
   /**
-   *  Public Constructor.
+   *  Public Constructor for Assignment.
    * @param nam name
    * @param due dueDate
    * @param prior priority

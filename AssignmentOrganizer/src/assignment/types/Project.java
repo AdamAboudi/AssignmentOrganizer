@@ -15,7 +15,7 @@ public class Project extends SuperAssignment {
   private boolean partners;
 
   /**
-   *  Public Constructor.
+   *  Public Constructor for Project.
    *  
    * @param nam Name
    * @param due DueDate

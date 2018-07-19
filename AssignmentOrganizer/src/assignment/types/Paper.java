@@ -15,7 +15,7 @@ public class Paper extends SuperAssignment {
   private int completionTime;
 
   /**
-   *  Public Constructor.
+   *  Public Constructor for Paper.
    *  
    * @param nam name
    * @param due dueDate

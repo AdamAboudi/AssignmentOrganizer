@@ -15,7 +15,7 @@ public class Reading extends SuperAssignment {
   private int completionTime;
 
   /**
-   *  Public Constructor.
+   *  Public Constructor for Reading.
    *  
    * @param nam Name
    * @param due DueDate
