@@ -11,7 +11,6 @@ bin/
 bin/**
 /build/
 *.class
-target/
 
 #Ignore Assignments.json
 assignments.json
