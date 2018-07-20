@@ -1,6 +1,6 @@
 # AssignmentOrganizer
 
-Personal Project created in 2017, but with continuous improvements for fun.
+Personal Project created in 2017 with continuous improvements.
 
 Maintains a list of assignments ordered by "power" - a metric that gives an assignment its overall importance.
 

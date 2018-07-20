@@ -52,7 +52,7 @@ public class Reading extends SuperAssignment {
   }
 
   //Calculate power for a project
-  public int readingPow() {
+  private int readingPow() {
     return (int) (this.length  + this.completionTime + this.getDaysPow() + this.getPriority() * 3);
   }
 

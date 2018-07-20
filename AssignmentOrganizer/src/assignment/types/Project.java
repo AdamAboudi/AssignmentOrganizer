@@ -56,7 +56,7 @@ public class Project extends SuperAssignment {
   /**
    * Calculate power for a project.
    */
-  public int projectPow() {
+  private int projectPow() {
     if (partners) {
       return (int) (this.difficulty  + 10 + this.getDaysPow() + this.getPriority());  
     } else {

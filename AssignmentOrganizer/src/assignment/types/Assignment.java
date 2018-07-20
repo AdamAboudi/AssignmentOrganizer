@@ -46,7 +46,7 @@ public class Assignment extends SuperAssignment {
     return completionTime;
   }
 
-  public int assignmentPow() {
+  private int assignmentPow() {
     return (int) (this.difficulty  + this.completionTime + this.getDaysPow() 
       + this.getPriority() * 3);
   }

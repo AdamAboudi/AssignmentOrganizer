@@ -52,7 +52,7 @@ public class Paper extends SuperAssignment {
   }
    
   //Calculate power for a paper
-  public int paperPow() {
+  private int paperPow() {
     return (int) (this.length   + this.completionTime + this.getDaysPow() + this.getPriority() * 3);
   }
    
