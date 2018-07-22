@@ -1,20 +1,10 @@
 package main;
 
-import assignment.types.Assignment;
-import assignment.types.Paper;
-import assignment.types.Project;
-import assignment.types.Reading;
-import assignment.types.SuperAssignment;
-
+import assignment.types.*;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -30,7 +20,25 @@ public class Organizer {
   static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
   private static final Gson gson = new Gson(); 
   static Path assignmentPath;
-  
+
+  public Organizer(File file) throws IOException {
+
+
+    file.createNewFile();
+    assignmentPath =  Paths.get(file.getAbsolutePath());
+    JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
+    SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
+
+    if (readAsArray != null) {
+      for (SuperAssignment assignment : readAsArray) {
+        AssignmentMap.put(assignment.getName(), assignment);
+      }
+
+      sortAndShow();
+    }
+    runLoop();
+
+  }
   /**
    * Main method.
    * @param args arguments (none)
@@ -38,20 +46,7 @@ public class Organizer {
    */
   public static void main(String[] args) throws IOException {
     File file = new File("assignments.json");
-    file.createNewFile();
-      
-    assignmentPath =  Paths.get(file.getAbsolutePath());
-    JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
-    SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
-    
-    if (readAsArray != null) { 
-      for (SuperAssignment assignment : readAsArray) {
-        AssignmentMap.put(assignment.getName(), assignment);
-      }
-      
-      sortAndShow();
-    }    
-    runLoop();  
+      Organizer main = new Organizer(file);
   }
   
   /**
