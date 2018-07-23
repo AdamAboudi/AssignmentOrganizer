@@ -17,15 +17,17 @@ import java.util.Scanner;
 public class Organizer {
 
   private static Scanner scan = new Scanner(System.in);
-  static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
-  private static final Gson gson = new Gson(); 
-  static Path assignmentPath;
+  private static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
+  private static final Gson gson = new Gson();
+  private static Path assignmentPath;
 
   public Organizer(File file) throws IOException {
-
-
     file.createNewFile();
     assignmentPath =  Paths.get(file.getAbsolutePath());
+
+  }
+
+  public void run() throws IOException{
     JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
     SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
 
@@ -39,20 +41,11 @@ public class Organizer {
     runLoop();
 
   }
-  /**
-   * Main method.
-   * @param args arguments (none)
-   * @throws IOException e
-   */
-  public static void main(String[] args) throws IOException {
-    File file = new File("assignments.json");
-      Organizer main = new Organizer(file);
-  }
-  
+
   /**
    * Run the main loop of the program.
    */
-  public static void runLoop() {
+  private static void runLoop() {
     
     while (true) {
      
@@ -72,10 +65,6 @@ public class Organizer {
         case "quit":
           try {
             updateFile();
-          } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-          } catch (FileNotFoundException e) {
-            e.printStackTrace();
           } catch (IOException e) {
             e.printStackTrace();
           }       
@@ -93,11 +82,11 @@ public class Organizer {
   /**
    * Display current assignments on the list.
    */
-  public static void sortAndShow() {
+  private static void sortAndShow() {
     System.out.println("*********************************");
     
     ArrayList<SuperAssignment> assignmentList =
-        new ArrayList<SuperAssignment>(AssignmentMap.values());
+        new ArrayList<>(AssignmentMap.values());
     Collections.sort(assignmentList);
     
     if (assignmentList.size() == 0) {
@@ -113,14 +102,14 @@ public class Organizer {
   /**
    *  Add a new assignment to the list.
    */
-  public static void addToList() {
+  private static void addToList() {
   
     boolean validType = false;
     
     while (!validType) {
 
       System.out.println("What type of assignment would you like to add? Options:"
-          + " Assigment, Paper, Project, or Reading. Enter \"Return\" to go back.");
+          + " Assignment, Paper, Project, or Reading. Enter \"Return\" to go back.");
       String input = scan.nextLine().toLowerCase();
 
       switch (input) {
@@ -156,10 +145,6 @@ public class Organizer {
     sortAndShow();
     try {
       updateFile();
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -168,7 +153,7 @@ public class Organizer {
   /**
    *  Remove an assignment from the list.
    */
-  public static void removeFromList() {
+  private static void removeFromList() {
     
     boolean validEntry = false;
 
@@ -177,7 +162,6 @@ public class Organizer {
           + " Enter \"Return\" to go back.");
       String input = scan.nextLine().toLowerCase();
       if (input.equals("return")) {
-        validEntry = true;
         break;
       }
       
@@ -192,10 +176,6 @@ public class Organizer {
     sortAndShow();
     try {
       updateFile();
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }  
@@ -207,7 +187,7 @@ public class Organizer {
    * @throws FileNotFoundException e
    * @throws IOException e
    */
-  public static void updateFile() throws UnsupportedEncodingException, 
+  private static void updateFile() throws UnsupportedEncodingException,
       FileNotFoundException, IOException {
     
     try (FileWriter filex = new FileWriter(assignmentPath.toString())) {
@@ -223,18 +203,16 @@ public class Organizer {
    * @param due Attempted due date
    * @return boolean on legality of date
    */
-  public static boolean legalDate(LocalDate due) {
+  private static boolean legalDate(LocalDate due) {
   
-    if (due.isBefore(LocalDate.now())) {
-      return false;
-    }
-    return true; 
+    return (due.isBefore(LocalDate.now()));
+
   }
   
   /**
    * Add a Project to the List.
    */
-  public static void addProject() {
+  private static void addProject() {
     
     String tmp;
     String[] parts;
@@ -250,7 +228,6 @@ public class Organizer {
       parts = tmp.split(" ");
       if (parts.length == 1) {
         if (parts[0].equals("return")) {
-          validEntry = true;
           return;
         }
       }
@@ -278,7 +255,7 @@ public class Organizer {
   /**
    * Add a Paper to the List.
    */
-  public static void addPaper() {
+  private static void addPaper() {
     
     String tmp;
     String[] parts;
@@ -293,7 +270,6 @@ public class Organizer {
       parts = tmp.split(" ");
       if (parts.length == 1) {
         if (parts[0].equals("return")) {
-          validEntry = true;
           return;
         }
       }
@@ -323,7 +299,7 @@ public class Organizer {
   /**
    * Add an Assignment to the List.
    */
-  public static void addAssignment() {
+  private static void addAssignment() {
     
     String tmp;
     String[] parts;
@@ -339,7 +315,6 @@ public class Organizer {
       parts = tmp.split(" ");
       if (parts.length == 1) {
         if (parts[0].equals("return")) {
-          validEntry = true;
           return;
         }
       }
@@ -371,7 +346,7 @@ public class Organizer {
   /**
    * Add a Reading to the List.
    */
-  public static void addReading() {
+  private static void addReading() {
     
     String tmp;
     String[] parts;
@@ -387,7 +362,6 @@ public class Organizer {
       parts = tmp.split(" ");
       if (parts.length == 1) {
         if (parts[0].equals("return")) {
-          validEntry = true;
           return;
         }
       }
