@@ -23,11 +23,11 @@ public class main extends Application{
     }
     public static void main(String[] args) throws IOException {
 
-        //launch(args);
+        launch(args);
         File file = new File("assignments.json");
         Organizer main = new Organizer(file);
 
-        main.run();
+        //main.run();
 
     }
 }
