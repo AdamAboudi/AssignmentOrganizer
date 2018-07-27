@@ -2,17 +2,15 @@ package main;
 
 import assignment.types.SuperAssignment;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import sun.applet.Main;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class rootController implements Initializable {
 
     @FXML
     private ListView<String> MainList;
@@ -32,7 +30,7 @@ public class Controller implements Initializable {
         for (int i = 0; i < assignmentList.size(); i++) {
             NameList.add((i + 1 + ") " + assignmentList.get(i).getName()));
         }
+        items.addAll(NameList);
 
-            items.addAll(NameList);
     }
 }
