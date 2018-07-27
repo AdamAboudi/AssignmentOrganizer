@@ -17,17 +17,13 @@ import java.util.Scanner;
 public class Organizer {
 
   private static Scanner scan = new Scanner(System.in);
-  private static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
+  public static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
   private static final Gson gson = new Gson();
   private static Path assignmentPath;
 
   public Organizer(File file) throws IOException {
     file.createNewFile();
     assignmentPath =  Paths.get(file.getAbsolutePath());
-
-  }
-
-  public void run() throws IOException{
     JsonReader reader = new JsonReader(new FileReader(assignmentPath.toString()));
     SuperAssignment[] readAsArray = gson.fromJson(reader, SuperAssignment[].class);
 
@@ -36,17 +32,16 @@ public class Organizer {
         AssignmentMap.put(assignment.getName(), assignment);
       }
 
-      sortAndShow();
     }
-    runLoop();
 
   }
+
 
   /**
    * Run the main loop of the program.
    */
-  private static void runLoop() {
-    
+  public static void run() {
+    sortAndShow();
     while (true) {
      
       System.out.println("*********************************");
@@ -191,7 +186,7 @@ public class Organizer {
       FileNotFoundException, IOException {
     
     try (FileWriter filex = new FileWriter(assignmentPath.toString())) {
-      SuperAssignment[] temp = (SuperAssignment[]) AssignmentMap.values().toArray(
+      SuperAssignment[] temp =  AssignmentMap.values().toArray(
           new SuperAssignment[AssignmentMap.size()]);
       String json = gson.toJson(temp);
       filex.write(json); 
@@ -205,7 +200,7 @@ public class Organizer {
    */
   private static boolean legalDate(LocalDate due) {
   
-    return (due.isBefore(LocalDate.now()));
+    return !(due.isBefore(LocalDate.now()));
 
   }
   
@@ -232,13 +227,13 @@ public class Organizer {
         }
       }
       try {       
-        if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {     
+        if (parts.length == 5 && legalDate(LocalDate.parse(parts[1]))) {
           AssignmentMap.put(parts[0], new Project("Project",
               parts[0],
-              LocalDate.parse(parts[1]), 
+              LocalDate.parse(parts[1]),
               Integer.parseInt(parts[2]),
-              Integer.parseInt(parts[3]), 
-              Boolean.valueOf(parts[4])));   
+              Integer.parseInt(parts[3]),
+              Boolean.valueOf(parts[4])));
           System.out.println("Project " + parts[0] + " added to list");
           validEntry = true;
         } else {
