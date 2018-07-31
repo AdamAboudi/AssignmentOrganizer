@@ -43,19 +43,17 @@ public class rootController implements Initializable {
 
         items.addAll(NameList);
 
-        MainList.setCellFactory(CheckBoxListCell.forListView(new Callback<String, ObservableValue<Boolean>>() {
-            @Override
-            public ObservableValue<Boolean> call(String item) {
-                BooleanProperty observable = new SimpleBooleanProperty();
-                 observable.addListener((obs, wasSelected, isNowSelected) ->
-                         {
-                             completedButton.setVisible(true);
-                             System.out.println("Checkbox for " + item + " was selected");
-                         }
-                 );
+        MainList.setCellFactory(CheckBoxListCell.forListView(item -> {
+            BooleanProperty observable = new SimpleBooleanProperty();
+             observable.addListener((obs, wasSelected, isNowSelected) ->
+                     {
 
-                return observable;
-            }
+                         completedButton.setVisible(true);
+                         System.out.println("Checkbox for " + item + " was selected");
+                     }
+             );
+
+            return observable;
         }));
 
     }
