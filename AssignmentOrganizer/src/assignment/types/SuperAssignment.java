@@ -101,7 +101,7 @@ public class SuperAssignment implements Comparable<SuperAssignment> {
   }
 
   public  String toString() {
-    return this.name + " " + this.dueDate + " " + this.priority + " ";
+    return this.getName();
   }
 
   @Override

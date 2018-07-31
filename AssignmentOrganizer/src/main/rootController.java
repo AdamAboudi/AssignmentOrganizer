@@ -11,50 +11,66 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.util.Callback;
+import javafx.event.ActionEvent;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class rootController implements Initializable {
 
     @FXML
-    private ListView<String> MainList;
+    private ListView<SuperAssignment> MainList;
 
     @FXML
     private Button completedButton;
 
+   private ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
+
+   private  List<SuperAssignment> list = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
-        ObservableList<String> items = MainList.getItems();
         completedButton.setVisible(false);
 
-        ArrayList<SuperAssignment> assignmentList =
-                new ArrayList<>(Organizer.AssignmentMap.values());
+        refreshList();
 
-        ArrayList<String> NameList = new ArrayList<>();
 
-        for (int i = 0; i < assignmentList.size(); i++) {
-            NameList.add((i + 1 + ") " + assignmentList.get(i).getName()));
+    completedButton.setOnAction(event -> {
+        for(int i = 0; i < list.size(); i++){
+            System.out.println("Removing "+list.get(i));
+            assignmentList.remove(list.get(i));
         }
 
-        items.addAll(NameList);
+        refreshList();
 
+    });
+    }
+
+
+    public void refreshList(){
+        ObservableList<SuperAssignment> items = MainList.getItems();
+        items.clear();
+        items.addAll(assignmentList);
         MainList.setCellFactory(CheckBoxListCell.forListView(item -> {
             BooleanProperty observable = new SimpleBooleanProperty();
-             observable.addListener((obs, wasSelected, isNowSelected) ->
-                     {
+            observable.addListener((obs, wasSelected, isNowSelected) ->
+                    {
 
-                         completedButton.setVisible(true);
-                         System.out.println("Checkbox for " + item + " was selected");
-                     }
-             );
+                        completedButton.setVisible(true);
+                        if(isNowSelected){
+                            list.add(item);
+                        }
+                        else{
+                            list.remove(item);
+                        }
+                    }
+            );
 
             return observable;
         }));
-
     }
 }
