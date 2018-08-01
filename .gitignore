@@ -19,3 +19,7 @@ assignments.json
 .idea/
 *.iml
 *.iws
+
+# Maven
+log/
+target/
