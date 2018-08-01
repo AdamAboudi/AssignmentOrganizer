@@ -1,6 +1,8 @@
 package main;
 
-import assignment.types.*;
+
+
+import main.java.assignment.types.*;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
@@ -17,7 +19,7 @@ import java.util.Scanner;
 public class Organizer {
 
   private static Scanner scan = new Scanner(System.in);
-  public static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<String, SuperAssignment>();
+  public static HashMap<String, SuperAssignment> AssignmentMap = new HashMap<>();
   private static final Gson gson = new Gson();
   private static Path assignmentPath;
 

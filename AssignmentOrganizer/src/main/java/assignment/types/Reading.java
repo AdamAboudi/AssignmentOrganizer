@@ -1,4 +1,4 @@
-package assignment.types;
+package main.java.assignment.types;
 
 import java.time.LocalDate;
 
