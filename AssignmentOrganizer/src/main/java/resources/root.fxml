@@ -7,13 +7,14 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.rootController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:id="pane" fx:controller="main.java.Controllers.rootController">
+
     <children>
-        <MenuBar>
+        <MenuBar fx:id="MenuBar">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="New Assignment" />
+                        <MenuItem fx:id="NewAssignment" mnemonicParsing="false" text="New Assignment" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
