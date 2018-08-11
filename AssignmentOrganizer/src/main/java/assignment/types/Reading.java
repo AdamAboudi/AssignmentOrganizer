@@ -55,9 +55,5 @@ public class Reading extends SuperAssignment {
   private int readingPow() {
     return (int) (this.length  + this.completionTime + this.getDaysPow() + this.getPriority() * 3);
   }
-
-  @Override
-    public String toString() {
-    return this.getType() + " " + super.toString() + this.length + " " + this.completionTime;
-  }
+  
 }

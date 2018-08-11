@@ -55,9 +55,4 @@ public class Paper extends SuperAssignment {
   private int paperPow() {
     return (int) (this.length   + this.completionTime + this.getDaysPow() + this.getPriority() * 3);
   }
-   
-  @Override
-   public String toString() {
-    return this.getType() + " " + super.toString() + this.length + " " + this.completionTime;
-  }
 }
