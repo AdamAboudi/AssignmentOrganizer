@@ -111,7 +111,6 @@ public class rootController implements Initializable {
 
     completedButton.setOnAction(event -> {
         for(int i = 0; i < list.size(); i++){
-            System.out.println("Removing "+list.get(i));
             Organizer.AssignmentMap.remove(list.get(i).getName());
         }
 
