@@ -2,27 +2,26 @@ package main.java.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import main.Organizer;
-import main.java.assignment.types.SuperAssignment;
+
 import main.java.assignment.types.Assignment;
-import sun.plugin.javascript.navig.Anchor;
+
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
 
 import static main.Organizer.AssignmentMap;
 
 public class newAssignmentController implements Initializable {
+
     @FXML
     private AnchorPane pane;
 
@@ -44,6 +43,9 @@ public class newAssignmentController implements Initializable {
     @FXML
     private Button AcceptButton;
 
+    @FXML
+    private Button BackButton;
+
     @Override
     public void initialize(URL location, ResourceBundle resources){
 
@@ -64,6 +66,18 @@ public class newAssignmentController implements Initializable {
         TextFormatter<String> textFormatter = new TextFormatter<>(filter);
         CompTimeTextField.setTextFormatter(textFormatter);
 
+        BackButton.setOnAction(event -> {
+
+            AnchorPane panel = null;
+            try {
+                panel = FXMLLoader.load(getClass().getResource("../resources/root.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            pane.getChildren().setAll(panel);
+
+
+        });
         AcceptButton.setOnAction(event -> {
             if(PrioChoiceBox.getValue() != null &&
                     DiffChoiceBox.getValue() != null &&
@@ -79,6 +93,7 @@ public class newAssignmentController implements Initializable {
                                          PrioChoiceBox.getValue(),
                                          DiffChoiceBox.getValue(),
                                          Integer.parseInt(CompTimeTextField.getText())));
+
 
                 AnchorPane panel = null;
                 try {

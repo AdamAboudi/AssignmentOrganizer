@@ -1,11 +1,9 @@
 package main.java.Controllers;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import main.java.assignment.types.SuperAssignment;
@@ -22,11 +20,7 @@ import main.Organizer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import static com.sun.javafx.scene.control.skin.Utils.getResource;
+import java.util.*;
 
 public class rootController implements Initializable {
 
@@ -42,20 +36,38 @@ public class rootController implements Initializable {
     @FXML
     private MenuItem NewAssignment;
 
-    private static ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
+    @FXML
+    private MenuItem NewPaper;
+
+    @FXML
+    private MenuItem NewProject;
+
+    @FXML
+    private MenuItem NewReading;
 
    private  List<SuperAssignment> list = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         refreshList();
-
-
 
         completedButton.setVisible(false);
 
-    NewAssignment.setOnAction(new EventHandler<ActionEvent>() {
+        NewPaper.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AnchorPane panel = null;
+                try {
+                    panel = FXMLLoader.load(getClass().getResource("../resources/newPaper.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                pane.getChildren().setAll(panel);
+
+            }
+        });
+
+        NewAssignment.setOnAction(new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
             AnchorPane panel = null;
@@ -69,25 +81,60 @@ public class rootController implements Initializable {
         }
     });
 
+        NewProject.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AnchorPane panel = null;
+                try {
+                    panel = FXMLLoader.load(getClass().getResource("../resources/newProject.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                pane.getChildren().setAll(panel);
+
+            }
+        });
+
+        NewReading.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                AnchorPane panel = null;
+                try {
+                    panel = FXMLLoader.load(getClass().getResource("../resources/newReading.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                pane.getChildren().setAll(panel);
+
+            }
+        });
+
     completedButton.setOnAction(event -> {
         for(int i = 0; i < list.size(); i++){
             System.out.println("Removing "+list.get(i));
-            assignmentList.remove(list.get(i));
+            Organizer.AssignmentMap.remove(list.get(i).getName());
         }
 
+        list.clear();
         refreshList();
-
     });
     }
 
 
     public void refreshList(){
+
+        try {
+            Organizer.updateFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
+
         ObservableList<SuperAssignment> items = MainList.getItems();
-
-        items.clear();
-
-        assignmentList =  new ArrayList<>(Organizer.AssignmentMap.values());
+        MainList.getItems().clear();
         items.addAll(assignmentList);
+        MainList.setItems(items);
+
         MainList.setCellFactory(CheckBoxListCell.forListView(item -> {
             BooleanProperty observable = new SimpleBooleanProperty();
             observable.addListener((obs, wasSelected, isNowSelected) ->

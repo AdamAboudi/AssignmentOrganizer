@@ -184,7 +184,7 @@ public class Organizer {
    * @throws FileNotFoundException e
    * @throws IOException e
    */
-  private static void updateFile() throws UnsupportedEncodingException,
+  public static void updateFile() throws UnsupportedEncodingException,
       FileNotFoundException, IOException {
     
     try (FileWriter filex = new FileWriter(assignmentPath.toString())) {

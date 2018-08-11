@@ -30,7 +30,7 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="61.0" layoutY="234.0" text="Difficulty" textAlignment="CENTER" wrappingWidth="176.73828125">
+      <Text layoutX="61.0" layoutY="234.0" text="Difficulty:" textAlignment="CENTER" wrappingWidth="176.73828125">
          <font>
             <Font size="19.0" />
          </font>
@@ -49,5 +49,10 @@
             <Font name="Imprint MT Shadow" size="40.0" />
          </font>
       </Text>
+      <Button fx:id="BackButton" layoutY="8.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
