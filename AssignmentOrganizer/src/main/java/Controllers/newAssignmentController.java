@@ -84,7 +84,7 @@ public class newAssignmentController implements Initializable {
                     CompTimeTextField.getText() != null &&
                     NameTextField.getText() != null &&
                     DueDatePicker.getValue() != null){
-                
+
                 AssignmentMap.put(NameTextField.getText(),
                         new Assignment("Assignment",
                                          NameTextField.getText(),

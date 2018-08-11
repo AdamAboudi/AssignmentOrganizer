@@ -4,8 +4,10 @@ package main.java.Controllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import main.java.assignment.types.SuperAssignment;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -49,8 +51,8 @@ public class rootController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        refreshList();
 
+        refreshList();
         completedButton.setVisible(false);
 
         NewPaper.setOnAction(new EventHandler<ActionEvent>() {
@@ -145,6 +147,9 @@ public class rootController implements Initializable {
                         }
                         else{
                             list.remove(item);
+                                if(list.isEmpty()){
+                                    completedButton.setVisible(false);
+                                }
                         }
                     }
             );
