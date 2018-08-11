@@ -1,5 +1,6 @@
 package main.java.Controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Or;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,12 +42,13 @@ public class rootController implements Initializable {
     @FXML
     private MenuItem NewAssignment;
 
-   private ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
+    private static ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
 
    private  List<SuperAssignment> list = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         refreshList();
 
 
@@ -81,7 +83,10 @@ public class rootController implements Initializable {
 
     public void refreshList(){
         ObservableList<SuperAssignment> items = MainList.getItems();
+
         items.clear();
+
+        assignmentList =  new ArrayList<>(Organizer.AssignmentMap.values());
         items.addAll(assignmentList);
         MainList.setCellFactory(CheckBoxListCell.forListView(item -> {
             BooleanProperty observable = new SimpleBooleanProperty();

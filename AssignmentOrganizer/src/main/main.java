@@ -24,8 +24,8 @@ public class main extends Application{
 
         File file = new File("assignments.json");
         Organizer organizer = new Organizer(file);
-        //launch(args);
-        organizer.run();
+        launch(args);
+        //organizer.run();
 
     }
 }

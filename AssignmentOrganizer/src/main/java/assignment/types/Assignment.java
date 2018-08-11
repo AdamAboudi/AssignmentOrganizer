@@ -50,9 +50,5 @@ public class Assignment extends SuperAssignment {
     return (int) (this.difficulty  + this.completionTime + this.getDaysPow() 
       + this.getPriority() * 3);
   }
-    
-  @Override
-    public String toString() {
-    return this.getType() + " " + super.toString() + this.difficulty + " " + this.completionTime;
-  }
+
 }
