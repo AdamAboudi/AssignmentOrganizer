@@ -55,7 +55,6 @@ public class newReadingController implements Initializable {
 
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String text = change.getText();
-
             if (text.matches("[0-9]*")) {
                 return change;
             }
@@ -67,7 +66,6 @@ public class newReadingController implements Initializable {
         LengthTextField.setTextFormatter(textFormatter);
 
         BackButton.setOnAction(event -> {
-
             AnchorPane panel = null;
             try {
                 panel = FXMLLoader.load(getClass().getResource("../resources/root.fxml"));
@@ -75,8 +73,6 @@ public class newReadingController implements Initializable {
                 e.printStackTrace();
             }
             pane.getChildren().setAll(panel);
-
-
         });
         AcceptButton.setOnAction(event -> {
             if(PrioChoiceBox.getValue() != null &&
@@ -85,7 +81,6 @@ public class newReadingController implements Initializable {
                     NameTextField.getText() != null &&
                     DueDatePicker.getValue() != null){
 
-                System.out.println(NameTextField.getText());
                 AssignmentMap.put(NameTextField.getText(),
                         new Reading("Reading",
                                 NameTextField.getText(),
@@ -93,8 +88,6 @@ public class newReadingController implements Initializable {
                                 PrioChoiceBox.getValue(),
                                 Integer.parseInt(LengthTextField.getText()),
                                 Integer.parseInt(CompTimeTextField.getText())));
-
-
                 AnchorPane panel = null;
                 try {
                     panel = FXMLLoader.load(getClass().getResource("../resources/root.fxml"));
@@ -104,6 +97,5 @@ public class newReadingController implements Initializable {
                 pane.getChildren().setAll(panel);
             }
         });
-
     }
 }

@@ -75,8 +75,6 @@ public class newAssignmentController implements Initializable {
                 e.printStackTrace();
             }
             pane.getChildren().setAll(panel);
-
-
         });
         AcceptButton.setOnAction(event -> {
             if(PrioChoiceBox.getValue() != null &&
@@ -84,7 +82,6 @@ public class newAssignmentController implements Initializable {
                     CompTimeTextField.getText() != null &&
                     NameTextField.getText() != null &&
                     DueDatePicker.getValue() != null){
-
                 AssignmentMap.put(NameTextField.getText(),
                         new Assignment("Assignment",
                                          NameTextField.getText(),
@@ -92,8 +89,6 @@ public class newAssignmentController implements Initializable {
                                          PrioChoiceBox.getValue(),
                                          DiffChoiceBox.getValue(),
                                          Integer.parseInt(CompTimeTextField.getText())));
-
-
                 AnchorPane panel = null;
                 try {
                     panel = FXMLLoader.load(getClass().getResource("../resources/root.fxml"));
@@ -103,6 +98,5 @@ public class newAssignmentController implements Initializable {
                 pane.getChildren().setAll(panel);
             }
         });
-
     }
 }

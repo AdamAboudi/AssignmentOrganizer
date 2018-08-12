@@ -65,7 +65,6 @@ public class rootController implements Initializable {
                     e.printStackTrace();
                 }
                 pane.getChildren().setAll(panel);
-
             }
         });
 
@@ -79,7 +78,6 @@ public class rootController implements Initializable {
                 e.printStackTrace();
             }
             pane.getChildren().setAll(panel);
-
         }
     });
 
@@ -107,7 +105,6 @@ public class rootController implements Initializable {
                     e.printStackTrace();
                 }
                 pane.getChildren().setAll(panel);
-
             }
         });
 
@@ -115,12 +112,10 @@ public class rootController implements Initializable {
         for(int i = 0; i < list.size(); i++){
             Organizer.AssignmentMap.remove(list.get(i).getName());
         }
-
         list.clear();
         refreshList();
     });
     }
-
 
     public void refreshList(){
 
@@ -129,8 +124,8 @@ public class rootController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
 
+        ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
         ObservableList<SuperAssignment> items = MainList.getItems();
         MainList.getItems().clear();
         items.addAll(assignmentList);
@@ -140,7 +135,6 @@ public class rootController implements Initializable {
             BooleanProperty observable = new SimpleBooleanProperty();
             observable.addListener((obs, wasSelected, isNowSelected) ->
                     {
-
                         completedButton.setVisible(true);
                         if(isNowSelected){
                             list.add(item);
@@ -153,7 +147,6 @@ public class rootController implements Initializable {
                         }
                     }
             );
-
             return observable;
         }));
     }
