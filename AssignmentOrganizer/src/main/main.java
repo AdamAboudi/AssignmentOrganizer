@@ -14,7 +14,7 @@ public class main extends Application{
     public void start( Stage primaryStage) throws Exception{
         Parent root;
         root = FXMLLoader.load(getClass().getResource("java/resources/root.fxml"));
-        primaryStage.setTitle("Organizer");
+        primaryStage.setTitle("AssignmentOrganizer");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
     }
@@ -25,7 +25,7 @@ public class main extends Application{
         File file = new File("assignments.json");
         Organizer organizer = new Organizer(file);
         launch(args);
-       // organizer.run();
+       //organizer.run();
 
     }
 }
