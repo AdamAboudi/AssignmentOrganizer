@@ -11,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 
 import main.java.assignment.types.Reading;
 
-
 import java.io.IOException;
 import java.net.URL;
 
