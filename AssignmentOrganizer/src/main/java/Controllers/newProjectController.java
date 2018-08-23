@@ -17,9 +17,8 @@ import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
-import java.util.function.UnaryOperator;
 
-import static main.Organizer.AssignmentMap;
+import static main.main.AssignmentMap;
 
 public class newProjectController implements Initializable {
 

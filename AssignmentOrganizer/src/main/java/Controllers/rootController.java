@@ -4,10 +4,8 @@ package main.java.Controllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
 import main.java.assignment.types.SuperAssignment;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -17,7 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.CheckBoxListCell;
-import main.Organizer;
+import main.main;
 
 
 import java.io.IOException;
@@ -110,7 +108,7 @@ public class rootController implements Initializable {
 
     completedButton.setOnAction(event -> {
         for(int i = 0; i < list.size(); i++){
-            Organizer.AssignmentMap.remove(list.get(i).getName());
+            main.AssignmentMap.remove(list.get(i).getName());
         }
         list.clear();
         refreshList();
@@ -120,12 +118,12 @@ public class rootController implements Initializable {
     public void refreshList(){
 
         try {
-            Organizer.updateFile();
+            main.updateFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        ArrayList<SuperAssignment> assignmentList = new ArrayList<>(Organizer.AssignmentMap.values());
+        ArrayList<SuperAssignment> assignmentList = new ArrayList<>(main.AssignmentMap.values());
         ObservableList<SuperAssignment> items = MainList.getItems();
         MainList.getItems().clear();
         items.addAll(assignmentList);
