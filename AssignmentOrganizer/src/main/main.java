@@ -44,7 +44,6 @@ public class main extends Application{
             for (SuperAssignment assignment : readAsArray) {
                 AssignmentMap.put(assignment.getName(), assignment);
             }
-
         }
         launch(args);
 
